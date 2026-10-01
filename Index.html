@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informasi TKA 2026</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+      margin: 0;
+    }
+    .container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    .logo {
+      width: 90px;
+      height: auto;
+      margin-bottom: 15px;
+    }
+    h2 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #0056b3;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #004085;
+    }
+    .result-box {
+      margin-top: 25px;
+      text-align: left;
+      border-top: 1px solid #eee;
+      padding-top: 15px;
+      display: none;
+    }
+    .result-box p {
+      margin: 8px 0;
+      color: #444;
+      font-size: 14px;
+    }
+    .error-msg {
+      color: #d9534f;
+      margin-top: 15px;
+      display: none;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <img src="https://lh3.googleusercontent.com/u/0/d/1NmhujSqCWX3fY30wSlAe9Ur5aR0jevXc" alt="Logo Sekolah" class="logo">
+  <h2>INFORMASI SESI TKA 2026</h2>
+
+  <form id="searchForm">
+    <input type="text" id="nisnInput" placeholder="Masukkan NISN diawali angka 9" required />
+    <button type="submit" id="submitBtn">Submit</button>
+  </form>
+
+  <p id="errorMessage" class="error-msg"></p>
+
+  <div id="resultBox" class="result-box">
+    <p><strong>Mengikuti TKA 2026 pada:</strong></p>
+    <p>Gelombang : <span id="resGelombang"></span></p>
+    <p>Sesi : <span id="resSesi"></span></p>
+    <p>Ruang : <span id="resRuang"></span></p>
+  </div>
+</div>
+
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzv3VT-P3VzifLdslOBpg8kTD3HCgcZgl60pxO9_Ptfp1H16Os6YRgfxIKyv04Sz6AMpA/exec';
+
+  document.getElementById('searchForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const nisn = document.getElementById('nisnInput').value.trim();
+    const submitBtn = document.getElementById('submitBtn');
+    const resultBox = document.getElementById('resultBox');
+    const errorMessage = document.getElementById('errorMessage');
+
+    if (!nisn) return;
+
+    submitBtn.innerText = 'Memuat...';
+    submitBtn.disabled = true;
+    resultBox.style.display = 'none';
+    errorMessage.style.display = 'none';
+
+    fetch(`${SCRIPT_URL}?nisn=${encodeURIComponent(nisn)}`)
+      .then(response => response.json())
+      .then(data => {
+        submitBtn.innerText = 'Submit';
+        submitBtn.disabled = false;
+
+        if (data.status === 'success') {
+          document.getElementById('resGelombang').innerText = data.gelombang;
+          document.getElementById('resSesi').innerText = data.sesi;
+          document.getElementById('resRuang').innerText = data.ruang;
+          resultBox.style.display = 'block';
+        } else {
+          errorMessage.innerText = data.message || 'Data tidak ditemukan.';
+          errorMessage.style.display = 'block';
+        }
+      })
+      .catch(error => {
+        submitBtn.innerText = 'Submit';
+        submitBtn.disabled = false;
+        errorMessage.innerText = 'Terjadi kesalahan sistem/koneksi.';
+        errorMessage.style.display = 'block';
+      });
+  });
+</script>
+
+</body>
+</html>
