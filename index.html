@@ -127,6 +127,18 @@
       color: #555;
       line-height: 1.5;
     }
+    .quote-text {
+      display: block;
+      font-size: 13px;
+      font-style: italic;
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+    .browser-hint {
+      display: block;
+      font-size: 12px;
+      color: #777;
+    }
     .error-msg {
       color: #d9534f;
       margin-top: 15px;
@@ -146,11 +158,11 @@
 
 <div class="container">
   <img src="https://lh3.googleusercontent.com/u/0/d/1NmhujSqCWX3fY30wSlAe9Ur5aR0jevXc" alt="Logo Sekolah" class="logo">
-  <h2>INFORMASI SESI TKA 2026</h2>
+  <h2>INFORMASI TKA 2026</h2>
 
   <form id="searchForm">
     <div class="input-hint">MASUKKAN NISN DIAWALI ANGKA 9</div>
-    <input type="text" id="nisnInput" placeholder="Masukkan NISN" required />
+    <input type="text" id="nisnInput" placeholder="Contoh: 90012345678" required />
     <button type="submit" id="submitBtn">Submit</button>
   </form>
 
@@ -158,7 +170,7 @@
 
   <div id="resultBox" class="result-box">
     <p class="student-name">Nama : <span id="resNama"></span></p>
-    <p><strong>Mengikuti TKA 2026 pada:</strong></p>
+    <p><strong>Telah Mengikuti TKA 2026 pada:</strong></p>
     <p>Gelombang : <span id="resGelombang"></span></p>
     <p>Sesi : <span id="resSesi"></span></p>
     <p>Ruang : <span id="resRuang"></span></p>
@@ -170,13 +182,13 @@
     </div>
 
     <div class="closing-note">
-      Semoga sukses dan mendapatkan hasil terbaik.<br>
-      Tutup browser, atau refresh untuk mencari data lainnya.
+      <span class="quote-text">"Hasil ini bukanlah garis finish, melainkan kompas untuk memetakan langkahmu menuju bangku kuliah. Apa pun angkanya, terus persiapkan diri untuk kampus impianmu!"</span>
+      <span class="browser-hint">Tutup browser, atau refresh untuk mencari data lainnya.</span>
     </div>
   </div>
 
   <div class="footer-credit">
-    sesitka9 | Develop by pakgurutri @2026 | Part of SYNC9
+    infotka9 | Develop by pakgurutri @2026 | Part of SYNC9
   </div>
 </div>
 
